@@ -1,0 +1,35 @@
+<script type="text/javascript">
+	$(function() { $('.notecard').corner({
+		  tl: { radius: 7 },
+		  tr: { radius: 7 },
+		  bl: { radius: 7 },
+		  br: { radius: 7},
+		  antiAlias: true}		
+		  );
+			})
+</script>
+
+
+<div class="lang">
+	<div class="lang_name">
+		<a href="<%= @lang.url %>" target="_blank"><%= @lang.display_name %></a>
+	</div>
+	<% if @lang.author and not @lang.author.empty? %>
+		<div class="lang_author">
+			by <%= @lang.author %>
+		</div>
+	<% end %>
+	<div class="notecard">
+		<div class="lang_summary">
+			<%= @lang.summary %>
+		</div>
+		<div class="lang_blurb">
+			<%= @lang.blurb.gsub("\n", "<br/>") %>
+		</div>
+		<% if not @lang.moderated %>
+			<div class="not_moderated">
+				Note: This entry has not yet been moderated.
+			</div>
+		<% end %>
+	</div>
+</div>

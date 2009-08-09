@@ -1,0 +1,17 @@
+<h2>Fledgling Language List</h2>
+<div class="lang_list">
+	<% @langs.each_with_index do |l, i| %>
+		<% if i % 2 == 0 %>
+			<div class="lang_item lang_item2">
+			<% else %>
+				<div class="lang_item lang_item1">
+				<% end %>
+				<a href="langs/<%= l.name %>"><%= l.display_name %></a> - 
+				<%= if l.summary.length > 80
+					    l.summary[0..80] + "..."
+				    else
+					    l.summary
+				    end %>	
+			    </div>
+		    <% end %>
+</div>
