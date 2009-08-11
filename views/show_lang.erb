@@ -2,6 +2,12 @@
 	<div class="lang_name">
 		<a href="<%= @lang.url %>" target="_blank"><%= @lang.display_name %></a>
 	</div>
+	<% if @lang.blurb.length > 1500 %>
+		<div class="comment_jump">
+			<a href="#comment_link" onclick="javascript:togglecomments()">Comments</a> &darr;
+		</div>
+	<% end %>
+
 	<% if @lang.author and not @lang.author.empty? %>
 		<div class="lang_author">
 			by <%= @lang.author %>
@@ -14,10 +20,23 @@
 		<div class="lang_blurb">
 			<%= @lang.blurb_html %>
 		</div>
-		<% if not @lang.moderated %>
-			<div class="not_moderated">
-				Note: This entry has not yet been moderated.
+		<% unless @preview %>
+			<div class="lang_modified">
+				Last updated <%= (@lang.last_modified || @lang.date_added).strftime("%D") %>
 			</div>
+			<% if not @lang.moderated %>
+				<div class="not_moderated">
+					Note: This entry has not yet been moderated.
+				</div>
+			<% end %>
 		<% end %>
 	</div>
+
+	<% unless @preview %>
+		<a id="comment_link" href="#disqus_thread" onclick="javascript:togglecomments()">View Comments</a>
+		<br/>
+		<div id="disqus" style="display:none" >
+			<div id="disqus_thread"></div><script type="text/javascript" src="http://disqus.com/forums/fll/embed.js"></script><noscript><a href="http://fll.disqus.com/?url=ref">View the discussion thread.</a></noscript><a href="http://disqus.com" class="dsq-brlink">Discussion powered by <span class="logo-disqus">Disqus</span></a>
+		</div>
+	<% end %>
 </div>

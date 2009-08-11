@@ -32,12 +32,13 @@ Please keep in mind the <a href="/criteria/">criteria</a> for listing languages 
 			<tr>
 				<td>&nbsp;</td>
 				<td>
+					<div style="float:right;margin-right: 10%;">
+						You may use <a href="/markdown.html" target="_blank" >Markdown</a> for formatting.<br/>URLs will be linked automatically.
+					</div>
 					<div id="captcha-spacer" style="height:120px;padding-bottom:10px">
 						<br/>
 						<%= captcha_answer_tag %>
-						<% if @params[:captcha_answer] == "" %>
-							<span class="error">Please enter the letters/numbers in the picture.</span>
-						<% end %>
+						Please enter the letters/numbers in the picture.<br/>
 					</div>
 				</td>
 			</tr>
@@ -46,7 +47,7 @@ Please keep in mind the <a href="/criteria/">criteria</a> for listing languages 
 				<td>
 					<input type="submit" value="Submit Language" />
 					<input type="checkbox" name="preview" checked="checked" />Preview
-					<div style="font-size:13px;font-style:italic;margin-top:10px">
+					<div style="font-size:13px;font-style:italic;margin-top:10px;background-color:white;padding:5px">
 						Note: Submitted languages will be listed immediately, but will be in an "unmoderated" state until an administrator approves it.
 					</div>
 				</td>

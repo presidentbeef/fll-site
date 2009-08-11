@@ -1,0 +1,28 @@
+<h2>Admin</h2>
+<table class="notecard">
+	<tr class="lang_item_first">
+		<td>Language</td>
+		<td></td>
+		<td>Actions</td>
+		<td></td>
+	</tr>
+	<% @langs.each do |l| %>
+		<tr>
+			<td class="lang_item">
+				<a href="/lang/<%= l.name %>"><%= l.display_name %></a>
+			</td>
+			<td class="lang_item">
+				<a href="/admin/edit/<%= l.name %>">Edit</a>
+			</td>
+			<td class="lang_item">
+				<a href="/admin/delete/<%= l.name %>">Delete</a>
+			</td>
+			<td class="lang_item">
+				<% if not l.moderated %>
+					<a href="/admin/approve/<%= l.name %>">Approve</a>
+				<% end %>
+			</td>
+		</tr>
+	<% end %>
+</table>
+<a href="/logout">Log out</a>

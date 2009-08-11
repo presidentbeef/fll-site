@@ -93,7 +93,11 @@ a:hover {
 
 .not_moderated {
 	font-size: 13px;
-	text-align: right;
+	font-style: italic;
+}
+
+.lang_modified {
+	font-size: 13px;
 	font-style: italic;
 }
 
@@ -108,6 +112,10 @@ a:hover {
 .lang_item_name {
 	font-weight: bold;
 	padding-right: 10px;
+}
+
+.lang_author {
+	margin-left: 12px;
 }
 
 .submit_form {
@@ -145,7 +153,6 @@ label.error {
 #captcha-answer {
 	width: 128px;
 }
-
 .lang_blurb h1{font-size:170%!important;border-top:2px solid #aaa!important;padding-top:.5em!important;margin-top:1.5em!important;}
 .lang_blurb h1:first-child {margin-top:0!important;padding-top:.25em!important;border-top:none!important;}
 .lang_blurb h2{font-size:150%!important;margin-top:1.5em!important;border-top:4px solid #e0e0e0!important;padding-top:.5em!important;}
@@ -162,10 +169,23 @@ label.error {
 .lang_blurb th{border-bottom:1px solid #bbb!important;padding:.2em 1em!important;}
 .lang_blurb td{border-bottom:1px solid #ddd!important;padding:.2em 1em!important;}
 .lang_blurb pre{margin:1em 0!important;font-size:90%!important;background-color:#ffffff!important;border:1px solid #dedede!important;padding:.5em!important;line-height:1.5em!important;color:#444!important;overflow:auto!important;}
-.lang_blurb code{padding:0!important;font-size:100%!important;background-color:#ffffff!important;border:none!important;}
+.lang_blurb pre code{padding:0!important;font-size:100%!important;background-color:#ffffff!important;border:none!important;}
 .lang_blurb code{font-size:90%!important;background-color:#ffffff!important;color:#444!important;padding:0 .2em!important;border:1px solid #dedede!important;}
 .lang_blurb .console{margin:1em 0!important;font-size:90%!important;background-color:black!important;padding:.5em!important;line-height:1.5em!important;color:white!important;}
 .lang_blurb .console code{padding:0!important;font-size:100%!important;background-color:black!important;border:none!important;color:white!important;}
 .lang_blurb .console span{color:#888!important;}
 .lang_blurb .console span.command{color:yellow!important;}
 
+.comment_jump {
+	float: right;
+	font-size: 9pt;
+	margin-right: 8px;
+}
+
+#comment_link {
+	margin: 10px 0px 10px 8px;
+}
+
+#disqus {
+	margin-left: 8px;
+}

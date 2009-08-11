@@ -1,0 +1,34 @@
+<script type="text/javascript" src="/js/jquery.validate.min.js"></script>
+<h2>Edit Language</h2>
+<div class="notecard submit_form">
+	<form action="/admin/edit" method="post" id="langform">
+		<table>
+			<tr>
+				<td class="label">Name</td>
+				<td><input type="text" size="30" maxlength="40" name="lang_name" class="required" value="<%= @params[:lang_name] %>"/></td>
+			</tr>
+			<tr>
+				<td class="label">Homepage</td>
+				<td><input type="text" size="30" maxlength="200" name="lang_url" class="required url" value="<%= @params[:lang_url] || "http://" %>"/></td>
+			</tr>
+			<tr>
+				<td class="label">Author(s)</td>
+				<td><input type="text"  size="30" maxlength="80" name="lang_author" value="<%= @params[:lang_author] %>" /> (Optional)</td>
+			</tr>
+			<tr>
+				<td class="label">Summary</td>
+				<td><input style="width:90%" type="text" size="60"  maxlength="100" name="lang_summary" value="<%= @params[:lang_summary] %>" class="required" /></td>
+			</tr>
+			<tr valign="top">
+				<td class="label">Description</td>
+				<td><textarea style="width:90%;height:180px" maxlength="6000" name="lang_blurb" class="required"><%= @params[:lang_blurb] %></textarea></td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<input type="submit" value="Submit Changes" />
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>
