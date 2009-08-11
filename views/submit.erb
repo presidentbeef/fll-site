@@ -1,54 +1,55 @@
 <script type="text/javascript" src="/js/jquery.validate.min.js"></script>
-<style>
-	.label {
-		text-align: right;
-		padding-right: 10px;
-	}
-	.error {
-		color: red;
-	}
-	label.error {
-		padding-left: 10px;
-		font-size: 12px;
-	}
-	span.optional {
-		color: red;
-	}
-</style>
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#langform").validate()});
-
-	$(function() {
-		$('#langform').corner();
-	});
-</script>
-<div class="submit_form">
-	<form action="/submit/" method="post" id="langform">
+<h2>Submit a New Language</h2>
+<p>
+Please keep in mind the <a href="/criteria/">criteria</a> for listing languages on this site.
+</p>
+<p>
+<em>Briefly:</em> The language may be a hobbyist or toy language (or not), should be "relatively" unknown, must have a website and be either under active developement or in a usable state.
+</p>
+<div class="notecard submit_form">
+	<form action="/submit" method="post" id="langform">
 		<table>
 			<tr>
 				<td class="label">Name</td>
-				<td><input type="text" size="30" maxlength="40" name="lang_name" class="required" /></td>
+				<td><input type="text" size="30" maxlength="40" name="lang_name" class="required" value="<%= @params[:lang_name] %>"/></td>
 			</tr>
 			<tr>
 				<td class="label">Homepage</td>
-				<td><input type="text" size="30" maxlength="200" name="lang_url" class="required url" value="http://"/></td>
+				<td><input type="text" size="30" maxlength="200" name="lang_url" class="required url" value="<%= @params[:lang_url] || "http://" %>"/></td>
 			</tr>
 			<tr>
-				<td class="label">Author(s)<span class="optional">*</span></td>
-				<td><input type="text"  size="30" maxlength="80" name="lang_author" /></td>
+				<td class="label">Author(s)</td>
+				<td><input type="text"  size="30" maxlength="80" name="lang_author" value="<%= @params[:lang_author] %>" /> (Optional)</td>
 			</tr>
 			<tr>
 				<td class="label">Summary</td>
-				<td><input type="text" size="60"  maxlength="100" name="lang_summary" class="required" /></td>
+				<td><input type="text" size="60"  maxlength="100" name="lang_summary" value="<%= @params[:lang_summary] %>" class="required" /></td>
 			</tr>
 			<tr valign="top">
 				<td class="label">Description</td>
-				<td><textarea rows="10" cols="69" maxlength="2000" name="lang_blurb" class="required"></textarea><br/><span class="optional">*</span><span style="font-size:12px">Not required</span></td>
+				<td><textarea rows="10" cols="69" maxlength="6000" name="lang_blurb" class="required"><%= @params[:lang_blurb] %></textarea></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>
-				<td><input type="submit" value="Submit Language" /></td>
+				<td>
+					<div id="captcha-spacer" style="height:120px;padding-bottom:10px">
+						<br/>
+						<%= captcha_answer_tag %>
+						<% if @params[:captcha_answer] == "" %>
+							<span class="error">Please enter the letters/numbers in the picture.</span>
+						<% end %>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>&nbsp;</td>
+				<td>
+					<input type="submit" value="Submit Language" />
+					<input type="checkbox" name="preview" checked="checked" />Preview
+					<div style="font-size:13px;font-style:italic;margin-top:10px">
+						Note: Submitted languages will be listed immediately, but will be in an "unmoderated" state until an administrator approves it.
+					</div>
+				</td>
 			</tr>
 		</table>
 	</form>

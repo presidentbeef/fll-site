@@ -1,0 +1,12 @@
+<h2>Welcome</h2>
+
+<h2>Fledgling Languages</h2>
+<% unless @approved_langs.empty? %>
+	<% @list = @approved_langs %>
+	<%= erb(:list, :layout => false) %>
+<% end %>
+<% unless @unapproved_langs.empty? %>
+	<h3>Unmoderated Entries</h3>
+	<% @list = @unapproved_langs %>
+	<%= erb(:list, :layout => false) %>
+<% end %>

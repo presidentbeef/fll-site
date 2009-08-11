@@ -24,7 +24,7 @@
 			<%= @lang.summary %>
 		</div>
 		<div class="lang_blurb">
-			<%= @lang.blurb.gsub("\n", "<br/>") %>
+			<%= @lang.blurb_html %>
 		</div>
 		<% if not @lang.moderated %>
 			<div class="not_moderated">

@@ -1,14 +1,41 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<title>New Languages List</title>
+		<title>Fledgling Languages List</title>
 		<meta type="keywords" value="programming languages,new languages,programming,language,toy languages,language list" />
 		<meta type="description" value="A list of fledgling, toy, and hobbyist languages." />
 		<link href="/css/style.css" media="all" rel="Stylesheet" type="text/css" />
 		<script type="text/javascript" src="/js/jquery.min.js"></script>
-		<script type="text/javascript" src="niftycube.js"></script>
+		<script type="text/javascript" src="/js/jquery.dropshadow.js"></script>
+		<script type="text/javascript" src="/js/niftycube.js"></script>
 		<script type="text/javascript">
 			window.onload=function(){
-				Nifty("div#content_border","big");
+				Nifty("ul#nav a","none transparent");
+				$("ul#nav a").dropShadow({top: -1});
+				$("div.content_border").dropShadow({top: -1, left: 3});
+				Nifty("div.lang_list");
+				if($('#formlang').length < 1) {
+				$("#langform").validate(
+				{ submitHandler: function(form) {
+							if(form.preview.checked) {
+								window.open("","preview","width=1000,height=800,toolbar=0"); 
+								form.action = "/preview";
+								form.target = "preview";
+							}
+							else {
+								form.action = "/submit";
+								form.target = "_self";
+							}
+							form.submit();
+						}
+					}
+				);
+				$('#captcha-spacer').prepend('<%= captcha_image_tag.gsub("\n", ""); %>');
+				}
+			};
+			window.onresize=function() {
+				$("ul#nav a").redrawShadow();
+				$("div.content_border").redrawShadow();
 			}
 		</script> 
 	</head>
@@ -16,18 +43,17 @@
 		<div id="header">
 			<a href="/"><img src="/images/logo.png" /></a>
 		</div>
+		<div id="navigation">
+			<ul id="nav">
+				<li><a href="/">List</a></li>
+				<li><a href="/submit/">Submit</a></li>
+				<li><a href="">Criteria</a></li>
+				<li><a href="">Feedback</a></li>
+			</ul>
+		</div>
 		<div class="content_border">
-			<div id="navigation">
-				<a href="/">List</a>
-				<a href="/submit/">Submit</a>
-				<a href="">Criteria</a>
-				<a href="">Feedback</a>
-			</div>
-
-			<div class="content_right_border">
-				<div id="content">
-					<%= yield %>
-				</div>
+			<div id="content">
+				<%= yield %>
 			</div>
 		</div>
 	</body>
