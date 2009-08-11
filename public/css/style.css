@@ -40,7 +40,6 @@ a:hover {
 #content {
 	padding: 10px;
 	background: white;
-	overflow: auto;
 }
 
 .content_border {
@@ -143,7 +142,10 @@ label.error {
 	font-size: 12px;
 }
 
-.lang_blurb h1,h2,h3,h4,h5,h6{border:0!important;}
+#captcha-answer {
+	width: 128px;
+}
+
 .lang_blurb h1{font-size:170%!important;border-top:2px solid #aaa!important;padding-top:.5em!important;margin-top:1.5em!important;}
 .lang_blurb h1:first-child {margin-top:0!important;padding-top:.25em!important;border-top:none!important;}
 .lang_blurb h2{font-size:150%!important;margin-top:1.5em!important;border-top:4px solid #e0e0e0!important;padding-top:.5em!important;}

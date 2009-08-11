@@ -1,7 +1,10 @@
 require "rubygems"
 require "sinatra"
-require "sinatra/captcha"
 require "datamapper"
+require "sinatra/captcha"
+require "sinatra-authentication"
+
+use Rack::Session::Cookie, :secret => 'aisdhasd8!*@*@08ashda8sdhklxbcv8web9qwoooo'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/langs.db")
 
@@ -13,6 +16,7 @@ class Languages
 	property :summary, Text
 	property :url, Text
 	property :date_added, Date
+	property :last_modified, DateTime
 	property :moderated, Boolean, :default => false
 	property :blurb, Text
 	property :blurb_html, Text
@@ -60,6 +64,7 @@ get '/langs/:name/?' do
 		@lang = params[:name].downcase
 		erb :no_lang
 	else
+		last_modified @lang.last_modified
 		erb :show_lang
 	end
 end
