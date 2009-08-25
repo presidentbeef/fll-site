@@ -2,7 +2,7 @@
 	<div class="lang_name">
 		<a href="<%= @lang.url %>" target="_blank"><%= @lang.display_name %></a>
 	</div>
-	<% if @lang.blurb.length > 1500 %>
+	<% if not @preview and @lang.blurb.length > 1500 %>
 		<div class="comment_jump">
 			<a href="#comment_link" onclick="javascript:togglecomments()">Comments</a> &darr;
 		</div>

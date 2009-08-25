@@ -39,7 +39,7 @@ helpers do
 	def make_lang params, name, display_name
 		require 'cgi'
 		require 'bluecloth'
-		Languages.new :name => CGI.escapeHTML(name),
+		Languages.new :name => name,
 			:display_name => CGI.escapeHTML(display_name),
 			:summary => CGI.escapeHTML(params[:lang_summary]),
 			:url => CGI.escapeHTML(params[:lang_url]),
@@ -52,23 +52,21 @@ helpers do
 	end
 end
 
-['/', '/lang/?'].each do |path|
-	get path  do
-		latest = Languages.all(:order => [:last_modified.desc]).first
-		if latest
-			last_modified(latest.last_modified || DateTime.now)
-		end
-
-		@approved_langs = Languages.approved
-		@unapproved_langs = Languages.unapproved
-		erb :index
+get '/' do
+	latest = Languages.all(:order => [:last_modified.desc]).first
+	if latest
+		last_modified(latest.last_modified || DateTime.now)
 	end
+
+	@approved_langs = Languages.approved
+	@unapproved_langs = Languages.unapproved
+	erb :index
 end
 
 get '/lang/:name/?' do
-	@lang = Languages.get(params[:name].downcase)
+	@lang = Languages.get(params[:name])
 	if @lang.nil?
-		@lang = params[:name].downcase
+		@lang = params[:name]
 		erb :no_lang
 	else
 		last_modified(@lang.last_modified || DateTime.now)
@@ -91,7 +89,7 @@ end
 
 post '/submit' do
 	display_name = params[:lang_name]
-	name = display_name.downcase.gsub(" ", "_")
+	name = display_name.downcase.gsub(/[^a-zA-Z0-9]/, "_")
 
 	if captcha_pass?
 		if Languages.get(name)
@@ -102,7 +100,7 @@ post '/submit' do
 			@lang = make_lang params, name, display_name 
 
 			if @lang.save
-				redirect "/lang/#{name}/", 302
+				redirect "/lang/#{@lang.name}/", 302
 			else
 				"Failed to save #{display_name}"
 			end
@@ -115,7 +113,7 @@ end
 
 post '/preview' do	
 	display_name = params[:lang_name]
-	name = display_name.downcase.gsub(" ", "_")
+	name = display_name.downcase.gsub(/[^a-zA-Z0-9]/, "_")
 	@lang = make_lang params, name, display_name
 	@preview = true
 
@@ -168,7 +166,6 @@ post '/admin/edit' do
 	lang.blurb_html = BlueCloth.new(params[:lang_blurb], BlueCloth_Opts).to_html
 	lang.author = CGI.escapeHTML(params[:lang_author] || "")
 	lang.last_modified = DateTime.now
-
 
 	if lang.update
 		redirect '/admin'
