@@ -2,11 +2,11 @@
 	<% @list.each_with_index do |l, i| %>
 		<tr>
 			<td class="<%= i > 0 ? "lang_item" : "lang_item_first" %>">
-				<a href="lang/<%= l.name %>"><span class="lang_item_name"><%= l.display_name %></span></a>
+				<span class="lang_item_name"><a href="lang/<%= l.name %>"><%= l.display_name %></a></span>
 			</td>
 			<td class="<%= i > 0 ? "lang_item" : "lang_item_first" %>">
-				<%= if l.summary.length > 80
-					    l.summary[0..80] + "..."
+				<%= if l.summary.length > 150
+					    l.summary[0..150] + "..."
 				    else
 					    l.summary
 				    end %>	
