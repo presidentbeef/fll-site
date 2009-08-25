@@ -25,7 +25,7 @@ togglecomments = function() {
 		$("div.content_border").redrawShadow();
 	}
 	else {
-		$('#comment_link').text('Hide Comments');
+		$('#comment_link').text('');
 		d.css({display: 'block'});
 		$("ul#nav a").redrawShadow();
 		$("div.content_border").redrawShadow();
