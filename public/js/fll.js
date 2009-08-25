@@ -21,10 +21,13 @@ togglecomments = function() {
 		d.css({display: 'none'});
 		$('#comment_link').text('View Comments');
 		$("div.content_border").redrawShadow();
+		$("ul#nav a").redrawShadow();
+		$("div.content_border").redrawShadow();
 	}
 	else {
 		$('#comment_link').text('Hide Comments');
 		d.css({display: 'block'});
+		$("ul#nav a").redrawShadow();
 		$("div.content_border").redrawShadow();
 	}
 }
