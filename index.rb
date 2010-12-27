@@ -1,4 +1,5 @@
 require "rubygems"
+gem "sinatra", "=0.9.4"
 require "sinatra"
 require "datamapper"
 require "sinatra/captcha"
