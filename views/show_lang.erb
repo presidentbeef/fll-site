@@ -13,6 +13,13 @@
 			by <%= @lang.author %>
 		</div>
 	<% end %>
+
+	<% if @lang.inactive %>
+		<div class="inactive">
+			This project appears to have gone dormant. It will be removed from the list soon unless new activity is noted.
+		</div>
+	<% end %>
+
 	<div class="notecard">
 		<div class="lang_summary">
 			<%= @lang.summary %>

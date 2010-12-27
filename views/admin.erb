@@ -18,6 +18,13 @@
 				<a href="/admin/delete/<%= l.name %>">Delete</a>
 			</td>
 			<td class="lang_item">
+				<% if l.inactive %>
+					<a href="/admin/active/<%= l.name %>">Active</a>
+				<% else %>
+					<a href="/admin/inactive/<%= l.name %>">Inactive</a>
+				<% end %>
+			</td>
+			<td class="lang_item">
 				<% if not l.moderated %>
 					<a href="/admin/approve/<%= l.name %>">Approve</a>
 				<% end %>

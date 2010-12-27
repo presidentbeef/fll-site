@@ -7,8 +7,15 @@ This site provides a list of programming languages which are just starting out i
 	<% @list = @approved_langs %>
 	<%= erb(:list, :layout => false) %>
 <% end %>
+
 <% unless @unapproved_langs.empty? %>
 	<h3>Unmoderated Entries</h3>
 	<% @list = @unapproved_langs %>
+	<%= erb(:list, :layout => false) %>
+<% end %>
+
+<% unless @inactive_langs.empty? %>
+	<h3>Inactive Languages</h3>
+	<% @list = @inactive_langs %>
 	<%= erb(:list, :layout => false) %>
 <% end %>

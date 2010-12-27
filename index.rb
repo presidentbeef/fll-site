@@ -22,14 +22,19 @@ class Languages
 	property :blurb, Text
 	property :blurb_html, Text
 	property :author, Text
+	property :inactive, Boolean, :default => false
 
 	def self.approved
-		all(:moderated => true, :order => [:name.asc])
+		all(:moderated => true, :inactive => false, :order => [:name.asc])
 	end
 
 	def self.unapproved
 		all(:moderated => false, :order => [:name.asc])
 	end	
+	
+	def self.inactive
+		all(:inactive => true, :order => [:name.asc])
+	end
 end
 
 Languages.auto_upgrade!
@@ -61,6 +66,7 @@ get '/' do
 
 	@approved_langs = Languages.approved
 	@unapproved_langs = Languages.unapproved
+	@inactive_langs = Languages.inactive
 	erb :index
 end
 
@@ -194,4 +200,40 @@ get '/admin/approve/:name' do
 	end
 end
 
+get '/admin/active/:name' do
+	login_required
 
+	lang = Languages.get(params[:name])
+
+	if lang.nil?
+		"No such language."
+	else
+		lang.active = true
+		lang.last_modified = DateTime.now
+
+		if lang.update
+			redirect '/admin'
+		else
+			"Could not update."
+		end
+	end
+end
+
+get '/admin/inactive/:name' do
+	login_required
+
+	lang = Languages.get(params[:name])
+
+	if lang.nil?
+		"No such language."
+	else
+		lang.inactive = true
+		lang.last_modified = DateTime.now
+
+		if lang.update
+			redirect '/admin'
+		else
+			"Could not update."
+		end
+	end
+end

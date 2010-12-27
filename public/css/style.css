@@ -194,3 +194,11 @@ label.error {
 #disqus {
 	margin-left: 8px;
 }
+
+.inactive {
+	border: 2px solid red;
+	font-size: medium;
+	margin: 10px 8px;
+	padding: 3px;
+	text-align: center;
+}
