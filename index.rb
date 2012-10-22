@@ -1,9 +1,11 @@
 require "rubygems"
-gem "sinatra", "=0.9.4"
+#gem "sinatra", "=0.9.4"
 require "sinatra"
+gem "datamapper", "=0.9.11"
 require "datamapper"
 require "sinatra/captcha"
 require "sinatra-authentication"
+
 
 use Rack::Session::Cookie, :secret => 'aisdhasd8!*@*@08ashda8sdhklxbcv8web9qwoooo'
 
@@ -107,6 +109,7 @@ post '/submit' do
 			@lang = make_lang params, name, display_name 
 
 			if @lang.save
+				`sendmail -t justin@presidentbeef.com\nSubject: New lang: #{name}\nNew language submitted: #{display_name}`
 				redirect "/lang/#{@lang.name}/", 302
 			else
 				"Failed to save #{display_name}"
@@ -208,7 +211,7 @@ get '/admin/active/:name' do
 	if lang.nil?
 		"No such language."
 	else
-		lang.active = true
+		lang.inactive = false
 		lang.last_modified = DateTime.now
 
 		if lang.update
@@ -237,3 +240,5 @@ get '/admin/inactive/:name' do
 		end
 	end
 end
+
+

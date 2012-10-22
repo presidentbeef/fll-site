@@ -33,8 +33,13 @@ a:hover {
 }
 
 #nav, #nav li{list-style-type:none;margin:0;padding:0px 0px 2px 0px}
-#nav {margin-left: 100px;width:620px;}
-#nav li{float:left;margin-right: 3px;text-align: center;}
+#nav {margin-left: 100px;width:640px;}
+#nav li {
+  float:left;margin-right: 3px;text-align: center;
+  border-top: 1px solid black;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+}
 #nav a{float:left;width: 7em;padding: 5px 0;background: white;text-decoration:none;color: #666}
 #nav a:hover {background: white; color: #000;}
 
@@ -72,6 +77,7 @@ a:hover {
 }
 
 .lang_url {
+  margin-top: 15px;
 }
 
 .lang_summary {

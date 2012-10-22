@@ -1,7 +1,9 @@
 <div class="lang">
-	<div class="lang_name">
+ 	<div class="lang_name">
 		<a href="<%= @lang.url %>" target="_blank"><%= @lang.display_name %></a>
-	</div>
+ 	</div>
+
+
 	<% if not @preview and @lang.blurb.length > 1500 %>
 		<div class="comment_jump">
 			<a href="#comment_link" onclick="javascript:togglecomments()">Comments</a> &darr;
@@ -13,6 +15,7 @@
 			by <%= @lang.author %>
 		</div>
 	<% end %>
+
 
 	<% if @lang.inactive %>
 		<div class="inactive">
@@ -28,14 +31,21 @@
 			<%= @lang.blurb_html %>
 		</div>
 		<% unless @preview %>
+      <div class="lang_url">
+      	<a href="<%= @lang.url %>" target="_blank"><%= @lang.url %></a>
+      </div>
+
 			<div class="lang_modified">
-				Last updated <%= (@lang.last_modified || @lang.date_added).strftime("%D") %>
+				Information updated <%= (@lang.last_modified || @lang.date_added).strftime("%D") %>
 			</div>
+
+
 			<% if not @lang.moderated %>
 				<div class="not_moderated">
 					Note: This entry has not yet been moderated.
 				</div>
 			<% end %>
+
 		<% end %>
 	</div>
 
