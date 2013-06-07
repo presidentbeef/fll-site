@@ -28,6 +28,7 @@ class Languages
 	property :example, Text
 	property :author, Text
 	property :inactive, Boolean, :default => false
+  property :retired, Boolean, :default => false
 
 	def self.approved
 		all(:moderated => true, :inactive => false, :order => [:name.asc])
@@ -38,7 +39,7 @@ class Languages
 	end	
 	
 	def self.inactive
-		all(:inactive => true, :order => [:name.asc])
+		all(:inactive => true, :retired => false, :order => [:name.asc])
 	end
 end
 
