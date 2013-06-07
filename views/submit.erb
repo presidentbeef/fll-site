@@ -29,11 +29,15 @@ Please keep in mind the <a href="/criteria/">criteria</a> for listing languages 
 				<td class="label">Description</td>
 				<td><textarea style="width:90%;height:180px" maxlength="6000" name="lang_blurb" class="required"><%= @params[:lang_blurb] %></textarea></td>
 			</tr>
+			<tr valign="top">
+				<td class="label">Example</td>
+				<td><textarea style="width:90%;height:180px" maxlength="6000" name="lang_example"><%= @params[:lang_example] %></textarea></td>
+			</tr>
 			<tr>
 				<td>&nbsp;</td>
 				<td>
 					<div style="float:right;margin-right: 10%;">
-						You may use <a href="/markdown.html" target="_blank" >Markdown</a> for formatting.<br/>URLs will be linked automatically.
+						You may use <a href="/markdown.html" target="_blank" >Markdown</a> for formatting the description.<br/>URLs will be linked automatically.
 					</div>
 					<div id="captcha-spacer" style="height:120px;padding-bottom:10px">
 						<br/>

@@ -30,9 +30,20 @@
 		<div class="lang_blurb">
 			<%= @lang.blurb_html %>
 		</div>
+    <% if @lang.example and not @lang.example.empty? %>
+      <div class="lang_example">
+        <pre><code><%= @lang.example %></code></pre>
+      </div>
+    <% end %>
 		<% unless @preview %>
       <div class="lang_url">
-      	<a href="<%= @lang.url %>" target="_blank"><%= @lang.url %></a>
+          <a href="<%= @lang.url %>" target="_blank">Language Homepage</a>
+          <% if @lang.source_url %>
+          - <a href="<%= @lang.source_url %>" target="_blank">Source Code</a>
+          <% end %>
+          <% if @lang.try_url %>
+          - <a href="<%= @lang.try_url %>" target="_blank">Try Online</a>
+          <% end %>
       </div>
 
 			<div class="lang_modified">

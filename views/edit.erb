@@ -12,6 +12,15 @@
 				<td><input type="text" size="30" maxlength="200" name="lang_url" class="required url" value="<%= @params[:lang_url] || "http://" %>"/></td>
 			</tr>
 			<tr>
+				<td class="label">Source Code URL</td>
+				<td><input type="text" size="30" maxlength="200" name="source_url" class="url" value="<%= @params[:source_url] %>"/></td>
+			</tr>
+			<tr>
+				<td class="label">Try Online URL</td>
+				<td><input type="text" size="30" maxlength="200" name="try_url" class="url" value="<%= @params[:try_url] %>"/></td>
+			</tr>
+
+			<tr>
 				<td class="label">Author(s)</td>
 				<td><input type="text"  size="30" maxlength="80" name="lang_author" value="<%= @params[:lang_author] %>" /> (Optional)</td>
 			</tr>
@@ -22,6 +31,10 @@
 			<tr valign="top">
 				<td class="label">Description</td>
 				<td><textarea style="width:90%;height:180px" maxlength="6000" name="lang_blurb" class="required"><%= @params[:lang_blurb] %></textarea></td>
+			</tr>
+			<tr valign="top">
+				<td class="label">Example</td>
+				<td><textarea style="width:90%;height:180px" maxlength="6000" name="lang_example"><%= @params[:lang_example] %></textarea></td>
 			</tr>
 			<tr>
 				<td>&nbsp;</td>

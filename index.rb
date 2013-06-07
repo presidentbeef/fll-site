@@ -18,11 +18,14 @@ class Languages
 	property :display_name, Text
 	property :summary, Text
 	property :url, Text
+  property :source_url, Text
+  property :try_url, Text
 	property :date_added, Date
 	property :last_modified, DateTime
 	property :moderated, Boolean, :default => false
 	property :blurb, Text
 	property :blurb_html, Text
+	property :example, Text
 	property :author, Text
 	property :inactive, Boolean, :default => false
 
@@ -53,6 +56,7 @@ helpers do
 			:url => CGI.escapeHTML(params[:lang_url]),
 			:blurb => CGI.escapeHTML(params[:lang_blurb]),
 			:blurb_html => BlueCloth.new(params[:lang_blurb], BlueCloth_Opts).to_html,
+      :example => CGI.escapeHTML(params[:lang_example].strip),
 			:author => CGI.escapeHTML(params[:lang_author] || ""),
 			:date_added => Date.today,
 			:last_modified => DateTime.now,
@@ -154,8 +158,11 @@ get '/admin/edit/:name' do
 	@params = {}
 	@params[:lang_name] = lang.display_name
 	@params[:lang_url] = lang.url
+	@params[:source_url] = lang.source_url
+	@params[:try_url] = lang.try_url
 	@params[:lang_summary] = lang.summary
 	@params[:lang_blurb] = lang.blurb
+	@params[:lang_example] = lang.example
 	@params[:lang_author] = lang.author
 	erb :edit
 end
@@ -172,8 +179,11 @@ post '/admin/edit' do
 	lang.display_name = CGI.escapeHTML(display_name)
 	lang.summary = CGI.escapeHTML(params[:lang_summary])
 	lang.url = CGI.escapeHTML(params[:lang_url])
+	lang.try_url = CGI.escapeHTML(params[:try_url])
+	lang.source_url = CGI.escapeHTML(params[:source_url])
 	lang.blurb = CGI.escapeHTML(params[:lang_blurb])
 	lang.blurb_html = BlueCloth.new(params[:lang_blurb], BlueCloth_Opts).to_html
+	lang.example = CGI.escapeHTML(params[:lang_example].strip)
 	lang.author = CGI.escapeHTML(params[:lang_author] || "")
 	lang.last_modified = DateTime.now
 
