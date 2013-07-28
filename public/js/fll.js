@@ -25,3 +25,39 @@ togglecomments = function() {
 		d.css({display: 'block'});
 	}
 }
+
+var toggle_sort  = function(turn_on) {
+	var a = $('#byalpha');
+	var b = $('#byadded');
+	var c = $('#byupdated');
+	var d = $('#byalphalink');
+	var e = $('#byaddedlink');
+	var f = $('#byupdatedlink');
+
+	if(turn_on == "alpha") {
+    a.css({display: 'block'});
+		b.css({display: 'none'});
+    c.css({display: 'none'});
+    d.css({'font-weight': 'bold'});
+    e.css({'font-weight': 'normal'});
+    f.css({'font-weight': 'normal'});
+	}
+  else if(turn_on == "added") {
+    a.css({display: 'none'});
+		b.css({display: 'block'});
+    c.css({display: 'none'});
+
+    d.css({'font-weight': 'normal'});
+    e.css({'font-weight': 'bold'});
+    f.css({'font-weight': 'normal'});
+	}
+  else if(turn_on == "updated") {
+    a.css({display: 'none'});
+		b.css({display: 'none'});
+    c.css({display: 'block'});
+
+    d.css({'font-weight': 'normal'});
+    e.css({'font-weight': 'normal'});
+    f.css({'font-weight': 'bold'});
+	}
+}

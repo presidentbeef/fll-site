@@ -10,7 +10,12 @@
 				    else
 					    l.summary
 				    end %>	
-			    </td>
-		    </tr>
-	    <% end %>
-    </table>
+     </td>
+     <% if @date_field %>
+			 <td class="<%= i > 0 ? "lang_item" : "lang_item_first" %>">
+        <%= l.send(@date_field).to_date %>
+      </td>
+     <% end %>
+   </tr>
+ <% end %>
+</table>

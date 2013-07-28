@@ -3,10 +3,37 @@
 This site provides a list of programming languages which are just starting out in the world. Feel free to <a href="/submit">submit</a> your own, or ones you know about!
 </p>
 <h2>Fledgling Languages</h2>
-<% unless @approved_langs.empty? %>
-	<% @list = @approved_langs %>
-	<%= erb(:list, :layout => false) %>
-<% end %>
+
+<div style='text-align: right; margin-right:10px'>
+Sort by <a id='byalphalink' style='font-weight: bold' href="javascript:toggle_sort('alpha')">name</a> |
+<a id='byaddedlink' href="javascript:toggle_sort('added')">added</a> |
+<a id='byupdatedlink' href="javascript:toggle_sort('updated')">updated</a>
+</div>
+
+<div id="byalpha">
+  <% unless @approved_langs.empty? %>
+    <% @list = @approved_langs %>
+    <%= erb(:list, :layout => false) %>
+  <% end %>
+</div>
+
+<div id="byadded">
+  <% unless @approved_langs.empty?
+  	@list = @approved_langs.sort_by { |l| l.date_added }.reverse
+    @date_field = :date_added %>
+  	<%= erb(:list, :layout => false) %>
+  <% end %>
+</div>
+
+<div id="byupdated">
+  <% unless @approved_langs.empty?
+  	@list = @approved_langs.sort_by { |l| l.last_modified }.reverse
+    @date_field = :last_modified %>
+  	<%= erb(:list, :layout => false) %>
+  <% end %>
+</div>
+
+<% @date_field = nil %>
 
 <% unless @unapproved_langs.empty? %>
 	<h3>Unmoderated Entries</h3>
