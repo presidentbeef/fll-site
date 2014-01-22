@@ -38,10 +38,10 @@
 		<% unless @preview %>
       <div class="lang_url">
           <a href="<%= @lang.url %>" target="_blank">Language Homepage</a>
-          <% if @lang.source_url %>
+          <% if @lang.source_url and not @lang.source_url.empty? %>
           - <a href="<%= @lang.source_url %>" target="_blank">Source Code</a>
           <% end %>
-          <% if @lang.try_url %>
+          <% if @lang.try_url and not @lang.try_url.empty? %>
           - <a href="<%= @lang.try_url %>" target="_blank">Try Online</a>
           <% end %>
       </div>
