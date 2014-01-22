@@ -175,7 +175,7 @@ post '/admin/edit' do
 	require 'bluecloth'
 
 	display_name = params[:lang_name]
-	name = display_name.downcase.gsub(" ", "_")
+	name = display_name.downcase.gsub(/[^a-zA-Z0-9]/, "_")
 	lang = Languages.get(name)
 	lang.display_name = CGI.escapeHTML(display_name)
 	lang.summary = CGI.escapeHTML(params[:lang_summary])
