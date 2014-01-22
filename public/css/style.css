@@ -160,6 +160,7 @@ label.error {
 }
 
 #captcha-answer {
+	display: block;
 	width: 128px;
 }
 
