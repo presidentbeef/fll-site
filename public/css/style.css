@@ -33,7 +33,7 @@ a:hover {
 }
 
 #nav, #nav li{list-style-type:none;margin:0;padding:0px 0px 2px 0px}
-#nav {margin-left: 100px;width:640px;}
+#nav { margin-right: 40px; }
 #nav li {
   float:left;margin-right: 3px;text-align: center;
   border-top: 1px solid black;
@@ -48,10 +48,14 @@ a:hover {
 	background: white;
 }
 
+#holder {
+  max-width: 1024px;
+  margin-left: 15%;
+	margin-right: 15%;
+}
+
 .content_border {
 	clear: both;
-	margin-left: 15%;
-	margin-right: 15%;
 	padding: 0px;
 	background-color: white;
 	border: 1px solid black;
@@ -96,6 +100,7 @@ a:hover {
 	padding: 5px 8px 5px 8px;
 	margin: 20px 8px 15px 8px;
 	background-color: #fff7ce;
+  width: 99%;
 }
 
 .not_moderated {

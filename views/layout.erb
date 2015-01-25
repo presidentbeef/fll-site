@@ -23,18 +23,20 @@
 		<div id="header">
 			<a href="/"><img src="/images/logo.png" /></a>
 		</div>
-		<div id="navigation">
-			<ul id="nav">
-				<li><a href="/">List</a></li>
-				<li><a href="/submit/">Submit</a></li>
-				<li><a href="/criteria">Criteria</a></li>
-				<li><a href="/feedback">Feedback</a></li>
-			</ul>
-		</div>
-		<div class="content_border">
-			<div id="content">
-				<%= yield %>
-			</div>
-		</div>
+    <div id="holder">
+  		<div id="navigation">
+	  		<ul id="nav">
+		  		<li><a href="/">List</a></li>
+			  	<li><a href="/submit/">Submit</a></li>
+				  <li><a href="/criteria">Criteria</a></li>
+				  <li><a href="/feedback">Feedback</a></li>
+			  </ul>
+		  </div>
+		  <div class="content_border">
+			  <div id="content">
+			  	<%= yield %>
+			  </div>
+		  </div>
+    </div>
 	</body>
 </html>
