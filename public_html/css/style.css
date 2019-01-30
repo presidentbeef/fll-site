@@ -135,6 +135,7 @@ a:hover {
 .submit_form {
 	margin-right: 10%;
 	margin-left: 10%;
+  width: auto;
 }
 
 #langform {
