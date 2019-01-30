@@ -1,13 +1,10 @@
 require "rubygems"
-#gem "sinatra", "=0.9.4"
 require "sinatra"
-gem "datamapper", "=0.9.11"
 require "datamapper"
-require "sinatra/captcha"
-require "sinatra-authentication"
+require "net/http"
+require "uri"
 
-
-use Rack::Session::Cookie, :secret => 'aisdhasd8!*@*@08ashda8sdhklxbcv8web9qwoooo'
+use Rack::Session::Cookie, :secret => 'dum dum dum'
 
 DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/langs.db")
 
@@ -63,6 +60,12 @@ helpers do
 			:last_modified => DateTime.now,
 			:moderated => false
 	end
+
+  def login_required
+    if session[:admin] != "you know what"
+      redirect "/"
+    end
+  end
 end
 
 get '/' do
@@ -101,11 +104,28 @@ get '/submit/?' do
 	erb :submit
 end
 
+def captcha_pass? response
+  opts = { "secret" => "blahdyblah",
+           "response" => response }
+
+  verify_check= Net::HTTP.post_form(URI("https://www.google.com/recaptcha/api/siteverify"), opts)
+
+  if verify_check
+    verified = JSON.parse(verify_check.body)
+    if verified["success"]
+      return true
+    else
+      $stderr.puts verified.inspect
+      return false
+    end
+  end
+end
+
 post '/submit' do
 	display_name = params[:lang_name]
 	name = display_name.downcase.gsub(/[^a-zA-Z0-9]/, "_")
 
-	if captcha_pass?
+	if captcha_pass? params[:'g-recaptcha-response']
 		if Languages.get(name)
 			@display_name = display_name
 			@name = name
@@ -114,7 +134,6 @@ post '/submit' do
 			@lang = make_lang params, name, display_name 
 
 			if @lang.save
-				`sendmail -t justin@presidentbeef.com\nSubject: New lang: #{name}\nNew language submitted: #{display_name}`
 				redirect "/lang/#{@lang.name}/", 302
 			else
 				"Failed to save #{display_name}"
@@ -133,6 +152,13 @@ post '/preview' do
 	@preview = true
 
 	erb :show_lang
+end
+
+get '/admin/login' do
+  if params[:user] == "whaaaaa?" and params[:pass] == "woohoo"
+    session[:admin] = "hmmmhmm"
+    redirect '/admin'
+  end
 end
 
 get '/admin' do
@@ -176,8 +202,8 @@ post '/admin/edit' do
 
 	display_name = params[:lang_name]
 	name = display_name.downcase.gsub(/[^a-zA-Z0-9]/, "_")
-	lang = Languages.get(name)
-	lang.display_name = CGI.escapeHTML(display_name)
+  lang = Languages.get(name)
+  lang.display_name = CGI.escapeHTML(display_name)
 	lang.summary = CGI.escapeHTML(params[:lang_summary])
 	lang.url = CGI.escapeHTML(params[:lang_url])
 	lang.try_url = CGI.escapeHTML(params[:try_url])
@@ -188,7 +214,7 @@ post '/admin/edit' do
 	lang.author = CGI.escapeHTML(params[:lang_author] || "")
 	lang.last_modified = DateTime.now
 
-	if lang.update
+	if lang.save
 		redirect '/admin'
 	else
 		"Bad..."
@@ -206,7 +232,7 @@ get '/admin/approve/:name' do
 		lang.moderated = true
 		lang.last_modified = DateTime.now
 
-		if lang.update
+		if lang.save
 			redirect '/admin'
 		else
 			"Could not update."
@@ -225,7 +251,7 @@ get '/admin/active/:name' do
 		lang.inactive = false
 		lang.last_modified = DateTime.now
 
-		if lang.update
+		if lang.save
 			redirect '/admin'
 		else
 			"Could not update."
@@ -244,12 +270,10 @@ get '/admin/inactive/:name' do
 		lang.inactive = true
 		lang.last_modified = DateTime.now
 
-		if lang.update
+		if lang.save
 			redirect '/admin'
 		else
 			"Could not update."
 		end
 	end
 end
-
-
