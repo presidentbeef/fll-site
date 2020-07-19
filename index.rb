@@ -105,6 +105,9 @@ get '/submit/?' do
 end
 
 def captcha_pass? response
+  if not $config_verifycaptcha
+    return true
+  end
   opts = { "secret" => "blahdyblah",
            "response" => response }
 
