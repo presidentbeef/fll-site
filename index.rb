@@ -155,9 +155,19 @@ post '/preview' do
 end
 
 get '/admin/login' do
-  if params[:user] == "whaaaaa?" and params[:pass] == "woohoo"
-    session[:admin] = "hmmmhmm"
-    redirect '/admin'
+	erb :login
+end
+
+post '/admin/login' do
+  if captcha_pass? params[:'g-recaptcha-response']
+    if params[:user] == "whaaaaa?" and params[:pass] == "woohoo"
+      session[:admin] = "hmmmhmm"
+      redirect '/admin'
+    else
+      redirect '/'
+    end
+  else
+    redirect '/'
   end
 end
 
