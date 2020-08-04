@@ -1,6 +1,10 @@
 require "rubygems"
 require "sinatra"
-require "datamapper"
+begin
+	require "datamapper"
+rescue LoadError => ex
+	require "data_mapper"
+end
 require "net/http"
 require "uri"
 
