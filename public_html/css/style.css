@@ -100,7 +100,8 @@ a:hover {
 	padding: 5px 8px 5px 8px;
 	margin: 20px 8px 15px 8px;
 	background-color: #fff7ce;
-  width: 99%;
+	width: calc(100% - 20px);
+	box-sizing: border-box;
 }
 
 .not_moderated {
